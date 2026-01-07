@@ -195,17 +195,8 @@ class Order_Class {
 
 class Dish {
     constructor(name, price) {
-        Object.defineProperties(this, {
-            name: {
-                value: checker('name', name),
-                writable: false,
-                enumerable: true
-            },
-            price: {
-                value: checker('price', price),
-                enumerable: true
-            }
-        })
+        this.name = name;
+        this.price = price;
     }
 }
 
@@ -239,3 +230,31 @@ class InvalidOrderError extends Error {
         this.name = 'InvalidOrderError';
     }
 }
+
+
+
+const caesar = new Appetizer('Caesar Salad', 10, true);
+const burger = new Entree('Cheeseburger', 12, 2000);
+const cake = new Dessert('Chocolate Cake', 8);
+
+const appetizers = new AppetizersMenu();
+const entrees = new EntreesMenu();
+const desserts = new DessertsMenu();
+
+
+async function main() {
+    appetizers.addDish(caesar);
+    await entrees.addDish(burger);
+    desserts.addDish(cake);
+
+    console.log('Appetizers:');
+    appetizers.viewDish();
+
+    console.log('Entrees:');
+    entrees.viewDish();
+
+    console.log('Desserts:');
+    desserts.viewDish();
+}
+
+main()
